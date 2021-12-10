@@ -16,6 +16,13 @@ const getAllEmails = async (email, password) => {
     .then((res) => res.data);
 };
 
+exports.haveNewEmail = async (email, password) => {
+  // check ahve new mail
+  const emails = await getAllEmails(email, password);
+  if (emails.length === 0) return false;
+  return true;
+}
+
 exports.getVerifyLink = async (email, password) => {
   let messages = await getAllEmails(email, password);
   if (messages.length === 0) return null;
