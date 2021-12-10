@@ -28,7 +28,6 @@ const fs = require("fs");
       while (!await mail.haveNewEmail(mailAccount.username, mailAccount.password)) {
           console.log("Waiting for the link to be verified 30/" + totalChecks);
           await new Promise((resolve) => setTimeout(resolve, 2000));
-          //   console.log(await mail.haveNewEmail(mailAccount.username, mailAccount.password));
           totalChecks++
           if (totalChecks > 10) {
               console.log("email verification link not found");
@@ -82,8 +81,7 @@ const fs = require("fs");
 
       console.log("Waiting for recive license key...");
       await page.waitForSelector('.detail-info-section:first-child ion-col:last-child ion-text[color="dark"]', { timeout: 250000 });
-    //   await page.waitForSelector('[data-r="license-list-open-detail-page-btn"]', { timeout: 120000 });
-    //   await page.click('[data-r="license-list-open-detail-page-btn"]');// continue button
+
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       const licenseHandle = await page.$('.detail-info-section:first-child ion-col:last-child ion-text[color="dark"]');

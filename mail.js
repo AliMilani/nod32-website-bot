@@ -17,7 +17,6 @@ const getAllEmails = async (email, password) => {
 };
 
 exports.haveNewEmail = async (email, password) => {
-  // check ahve new mail
   const emails = await getAllEmails(email, password);
   if (emails.length === 0) return false;
   return true;
@@ -38,7 +37,3 @@ exports.getVerifyLink = async (email, password) => {
     );
 };
 exports.deleteMe = async () => mailjs.deleteMe();
-
-// getAllEmails("m46bi@leadwizzer.com","z6o6kwjw").then((res)=>console.log(res));
-// getAllEmails('6jda0@leadwizzer.com', '330uxhcj').then(res => console.log(res));
-// getAllEmails('6jda0@leadwizzer.com', '330uxhcj').then(res => console.log(res));
