@@ -28,19 +28,13 @@ exports.getVerifyLink = async (email, password) => {
   if (messages.length === 0) return null;
 
   return await mailjs
-    .getMessage(
-      messages.find(
-        (message) => message.subject === "Account verification - ESET HOME"
-      ).id
-    )
-    .then((verifyMessage) =>
-      verifyMessage.data.text
-        .split("\n")
-        .find((line) =>
-          line.includes(
-            "https://login.eset.com/Register/RegistrationConfirmed?token="
-          )
-        )
+    .getMessage(messages.find((message) => message.subject === "Account verification - ESET HOME").id)
+    .then((verifyMessage) => {
+      if (verifyMessage.data.text) {
+        let VerifyLink = verifyMessage.data.text.split("\n")[5];
+       return VerifyLink ? VerifyLink : null;
+      }
+    }
     );
 };
 exports.deleteMe = async () => mailjs.deleteMe();
